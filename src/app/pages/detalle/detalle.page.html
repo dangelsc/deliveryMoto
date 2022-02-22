@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>detalle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="">
+    </ion-avatar>
+    <h2>{{pedido.cliente}}</h2>
+    <p>{{pedido.fecha}}</p>
+    <h2>{{pedido.estado}}</h2>
+    
+  </ion-item>
+
+  <ion-item *ngFor="let item of pedido.detalle">
+    {{item.producto.nombre}}
+    <ion-label item-end>
+      {{item.cantidad}}
+    </ion-label>
+    <ion-label item-end>
+      *{{item.producto.precio}}
+    </ion-label>
+    <ion-label item-end>=
+      {{item.importe}}
+    </ion-label>
+  </ion-item>
+  <ion-item >
+    <ion-button *ngIf="pedido.estadoMoto ==='' ||pedido.estadoMoto ==='rechazado'"  color="primary"
+    shape="full" (click)="estadoMoto('aceptado')" expand="block">Aceptar</ion-button>
+    <ion-button  color="primary"
+    shape="full" *ngIf="pedido.estadoMoto ==='' ||pedido.estadoMoto ==='rechazado'" (click)="estadoMoto('rechazado')" expand="block">Rechazar</ion-button>
+    
+    <ion-button  color="primary"
+    shape="full" *ngIf="pedido.estado ==='envio'"  (click)="estadoPedido('terminado')" expand="block">Terminado</ion-button>
+  </ion-item>
+  
+</ion-content>
