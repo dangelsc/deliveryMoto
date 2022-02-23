@@ -15,15 +15,22 @@ export class PedidoService {
       //,private dbb:Firestore
     )
   { }
-  async getAll(): Promise<any>
+  async getAll(uid): Promise<any>
   {
+
+
     return new Promise((resolve, reject) =>
     {
+
       try{
           const notesRef = collection(
             this.dbb,this.dbpath);
+          console.log("uid",uid);
           const q=query(
-            notesRef,where('estado','==','Proceso'));
+            notesRef,where('estado','==','Proceso')
+            ,where('idmoto','==',uid)
+            );
+
           resolve(
             collectionData(q,{ idField: 'id'}
             ));// as Observable<Coleccion[]>;
@@ -33,7 +40,7 @@ export class PedidoService {
       }
     });
   }
-  async getAllAceptado(): Promise<any>
+  async getAllAceptado(uid): Promise<any>
   {
     return new Promise((resolve, reject) =>
     {
@@ -42,7 +49,7 @@ export class PedidoService {
             this.dbb,this.dbpath);
           const q=query(
             notesRef,where('estado','==','envio')
-            //,where('idmoto','==','')
+            ,where('idmoto','==',uid)
             );
           resolve(
             collectionData(q,{ idField: 'id'}

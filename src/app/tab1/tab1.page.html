@@ -10,7 +10,7 @@
   <ion-list>
     <ion-item *ngFor="let item of lista" (click)="opendetaill(item)">
       <ion-label>Bs. {{item.total}}</ion-label>
-      <ion-label>{{item.fecha.toDate()|date:'dd/MM/YYYY HH:mm:ss'}}</ion-label>
+      <ion-label>{{item.fecha|date:'dd/MM/YYYY HH:mm:ss'}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

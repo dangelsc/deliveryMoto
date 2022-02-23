@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2>Login</h2>
+    <input type="text" [(ngModel)]="email">
+    <input type="password" [(ngModel)]="password">
+    <p>Please login.</p>
+    <ion-button expand="block" (click)="loginEmail()">Entrar al sistema</ion-button>
+    <ion-button expand="block"  (click)="loginGoogle()">Login con Google</ion-button>
+    
+    <ion-button expand="block" (click)="salir()">Salir</ion-button>
+  
+</ion-content>

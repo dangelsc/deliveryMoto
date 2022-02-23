@@ -2,6 +2,26 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Pedido } from 'src/app/models/Pedido';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { Map, tileLayer, marker, icon } from 'leaflet';
+/*
+usuario-> crud
+moto-> crud
+producto-> crud
+pedidos->(asignar moto, cancelar)
+pedidos-> (lista de envios)
+pedidos -> terminador
+clientes->(listado,dar de baja)
+*/ 
+
+/*
+cliente
+  calificar entrega
+moto
+  ---
+*/
+
+
+
 
 @Component({
   selector: 'app-detalle',
@@ -15,13 +35,30 @@ export class DetallePage implements OnInit {
     private alertCtrl:AlertController,
     private control:ModalController
     ) {    
+      
    }
-
-  ngOnInit() {
+   ngAfterViewInit() {
     this.db.getItem(this.id).subscribe(server=>{
       this.pedido=server;
       console.log("datos->",server);
+      this.initMap();
     })
+  }
+  initMap() {
+    const map = new Map('map').setView([this.pedido.lat,this.pedido.lon],12);
+    tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    const customMarkerIcon = icon({
+      iconUrl: 'assets/images/custom-marker-icon.png',
+      iconSize: [64, 64], 
+      popupAnchor: [0, -20]
+    });
+    marker([this.pedido.lat,this.pedido.lon], {icon: customMarkerIcon})
+    .addTo(map).openPopup();
+  }
+  ngOnInit() {
+   
   }
   estadoMoto(estado){
     this.pedido.estadoMoto=estado;

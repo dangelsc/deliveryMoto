@@ -13,5 +13,7 @@ export class Pedido{
     moto?:string;
     estadoMoto?:string;
     estadoPedido?:string;
+    lat:Number;
+    lon:Number;
     //constructor(){}
 }
